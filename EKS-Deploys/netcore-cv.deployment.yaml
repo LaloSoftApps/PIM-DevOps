@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: cv-deployment
+  labels:
+    app: cv
+spec:
+  selector:
+    matchLabels:
+      app: cv  
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        app: cv
+    spec:
+      containers:
+      - name: cv
+        image: docker.io/lalosoftapps/cvonline:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cv
+  namespace: default
+  labels:
+    app: cv
+spec:
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: cv
+  type: LoadBalancer
