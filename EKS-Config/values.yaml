@@ -1,0 +1,7 @@
+[OUTPUT]
+   Name opensearch
+   Match *
+   Host https://search-eksworkshop-logging-jqypbxhqg3b5m4jcs5uqcczqta.us-east-2.es.amazonaws.com/_dashboards/
+   Port 8080
+   Index my_index
+   Type my_type
